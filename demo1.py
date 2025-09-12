@@ -58,3 +58,16 @@ ax2.set_xlabel('y')
 ax2.set_ylabel('z')
 ax2.streamplot(yy,zz,Ey[:,:,0],Ez[:,:,0],cmap='autumn',density=0.5)
 plt.show()
+
+
+
+
+# 创建颜色映射
+norm = colors.Normalize(vmin=min(density[0,0,:]), vmax=max(density[0,0,:]))
+cmap = cm.jet
+# 将密度值映射到颜色
+arrow_colors = cmap(norm(density[0,0,:]))
+ax1.quiver(X[...,0],Y[...,0],Z[...,0],Ex,Ey,Ez,length=0.3,normalize=True,linewidth=0.5) 
+plt.title('3d view of E field of charged ring ')
+theta = np.linspace(0, 2*np.pi, 100)
+x_ring = r0 * np.cos(theta)
